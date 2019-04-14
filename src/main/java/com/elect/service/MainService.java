@@ -27,4 +27,11 @@ public interface MainService {
      * @throws Exception
      */
     List<Product> newBook() throws Exception;
+
+    /**
+     * 图书分类
+     * @return
+     * @throws Exception
+     */
+    List<Book> bookList() throws Exception;
 }

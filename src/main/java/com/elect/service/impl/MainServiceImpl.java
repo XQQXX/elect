@@ -67,4 +67,16 @@ public class MainServiceImpl implements MainService {
         return list;
     }
 
+    @Override
+    public List<Book> bookList() throws Exception {
+        List<Book> list=new ArrayList<Book>();
+        List<Book> books=bookDao.findBookAll();
+        List<Product> products=productDao.findAll();
+        for(int i=0;i<books.size();i++){
+            books.get(i).setProduct(products.get(i));
+            list.add(books.get(i));
+        }
+        return list;
+    }
+
 }

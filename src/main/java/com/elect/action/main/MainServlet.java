@@ -31,6 +31,9 @@ public class MainServlet extends HttpServlet {
 //            最新上架
             List<Product> newBook=mainService.newBook();
             request.getSession().setAttribute("newBook",newBook);
+//            所有图书
+            List<Book> bookList=mainService.bookList();
+            request.getSession().setAttribute("bookList",bookList);
             response.sendRedirect("main/main.jsp");
         } catch (Exception e) {
             e.printStackTrace();
