@@ -6,11 +6,11 @@
 		</h2>
 		
 		<!--1级分类开始-->
-		<c:forEach items="${category}" var="first">
+		<c:forEach items="${category}" var="first" varStatus="i">
         <div class="bg_old" onmouseover="this.className = 'bg_white';"
 				onmouseout="this.className = 'bg_old';">
 				<h3>
-					[<a href='#'>${first.key}</a>]
+					[<a href='list.main?id=${i.count+1}&name=${first.key}'>${first.key}</a>]
 				</h3>
 				<ul class="ul_left_list">
                     <c:forEach var="second" items="${first.value}">

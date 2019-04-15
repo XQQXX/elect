@@ -20,7 +20,7 @@ public class CategoryProductDaoImpl implements CategoryProductDao {
         ps.setInt(1,id);
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
-            Category_product category_product=new Category_product(rs.getInt(1),rs.getInt(3),id);
+            Category_product category_product=new Category_product(rs.getInt(1),rs.getInt(2),id);
             list.add(category_product);
         }
         connection.close();

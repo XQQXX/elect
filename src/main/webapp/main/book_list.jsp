@@ -39,7 +39,10 @@
 							<li>
 								<div>
 									<div class=second_fenlei>
-                                        &middot;全部&nbsp;(<c:forEach items="${categories}" var="first"></c:forEach>)
+                                        <c:forEach items="${categories}" var="first">
+                                            <c:set var="totol" value="${totol+first.category_products.size()}"></c:set>
+                                        </c:forEach>
+                                        &middot;全部&nbsp;(${totol})
 									</div>
 								</div>
 							</li>
