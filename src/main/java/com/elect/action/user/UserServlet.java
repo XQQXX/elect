@@ -119,7 +119,7 @@ public class UserServlet extends HttpServlet {
                             e.printStackTrace();
                         }
                         request.getSession().setAttribute("user",user);
-                        response.sendRedirect("../main");
+                        response.sendRedirect("../main.main");
                     }else{
                         String uuid=RanCode.ranUUID();
                         SendMail.sendMail(user.getEmail(),uuid);

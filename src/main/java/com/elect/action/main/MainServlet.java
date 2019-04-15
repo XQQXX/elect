@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/main")
+@WebServlet("*.main")
 public class MainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        预防乱码
@@ -23,27 +23,48 @@ public class MainServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
 //        注入MainService
         MainService mainService=new MainServiceImpl();
-        try {
-//            首页推荐
-            List<Book> recommend=mainService.recommend();
-            request.getSession().setAttribute("recommend",recommend);
-//            热销推荐
-            List<Product> hotBook=mainService.hotBook();
-            request.getSession().setAttribute("hotBook",hotBook);
-//            最新上架
-            List<Product> newBook=mainService.newBook();
-            request.getSession().setAttribute("newBook",newBook);
-//            所有图书
-            List<Book> bookList=mainService.bookList();
-            request.getSession().setAttribute("bookList",bookList);
-//            图书分类
-            Map<String,List<Category>> category=mainService.Category();
-            request.getSession().setAttribute("category",category);
-            response.sendRedirect("main/main.jsp");
-        } catch (Exception e) {
-            e.printStackTrace();
+        String uri=request.getRequestURI();
+        uri=uri.substring(uri.lastIndexOf("/"),uri.lastIndexOf("."));
+        if(uri.equals("/main")) {
+            try {
+//                首页推荐
+                List<Book> recommend = mainService.recommend();
+                request.getSession().setAttribute("recommend", recommend);
+//                热销推荐
+                List<Product> hotBook = mainService.hotBook();
+                request.getSession().setAttribute("hotBook", hotBook);
+//                最新上架
+                List<Product> newBook = mainService.newBook();
+                request.getSession().setAttribute("newBook", newBook);
+//                图书分类
+                Map<String, List<Category>> category = mainService.Category();
+                request.getSession().setAttribute("category", category);
+//                显示所有图书
+                List<Book> bookList = mainService.bookList();
+                request.getSession().setAttribute("bookList",bookList);
+                response.sendRedirect("main/main.jsp");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
+//        图书分类
+        if(uri.equals("/list")){
+            try {
+                int id=Integer.parseInt(request.getParameter("id"));
+                String name=request.getParameter("name");
+//                显示分类栏
+                Map<String, List<Category>> category= (Map<String, List<Category>>) request.getSession().getAttribute("category");
+                List<Category> categories=category.get(name);
+                request.setAttribute("categories", categories);
+                request.setAttribute("name",name);
+//                按分类显示图书
+                List<Book> bookCats=mainService.CateList(id);
+                request.setAttribute("bookCats",bookCats);
+                request.getRequestDispatcher("book_list.jsp").forward(request,response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

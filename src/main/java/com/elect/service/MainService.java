@@ -43,4 +43,12 @@ public interface MainService {
      * @throws Exception
      */
     Map<String,List<Category>> Category() throws Exception;
+
+    /**
+     * 按图书类别查询
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    List<Book> CateList(int id) throws Exception;
 }

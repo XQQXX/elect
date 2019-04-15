@@ -2,9 +2,12 @@ package com.elect.service.impl;
 
 import com.elect.dao.BookDao;
 import com.elect.dao.CategoryDao;
+import com.elect.dao.CategoryProductDao;
 import com.elect.dao.ProductDao;
+import com.elect.dao.impl.CategoryProductDaoImpl;
 import com.elect.entity.Book;
 import com.elect.entity.Category;
+import com.elect.entity.Category_product;
 import com.elect.entity.Product;
 import com.elect.factory.DaoFactory;
 import com.elect.service.MainService;
@@ -17,6 +20,7 @@ public class MainServiceImpl implements MainService {
     private BookDao bookDao= (BookDao) DaoFactory.getDaoImpl("BookDao");
     private ProductDao productDao= (ProductDao) DaoFactory.getDaoImpl("ProductDao");
     private CategoryDao categoryDao= (CategoryDao) DaoFactory.getDaoImpl("CategoryDao");
+    private CategoryProductDao categoryProductDao= (CategoryProductDao) DaoFactory.getDaoImpl("CategoryProductDao");
     @Override
     public List<Book> recommend() throws Exception {
         List<Book> list=new ArrayList<Book>();
@@ -86,9 +90,26 @@ public class MainServiceImpl implements MainService {
         List<Category> list=categoryDao.findByParentId(1);
         for(int i=0;i<list.size();i++){
             List<Category> classify=categoryDao.findByParentId(i+2);
+            for (int j=0;j<classify.size();j++){
+                List<Category_product> category_products=categoryProductDao.findByCatId(classify.get(j).getId());
+                classify.get(j).setCategory_products(category_products);
+            }
             categoryMap.put(list.get(i).getName(),classify);
         }
         return categoryMap;
+    }
+
+    @Override
+    public List<Book> CateList(int id) throws Exception {
+        List<Book> list=new ArrayList<Book>();
+        List<Category_product> category_products =categoryProductDao.findByCatId(id);
+        for(int i=0;i<category_products.size();i++) {
+            Book book = bookDao.findBookById(category_products.get(i).getId());
+            Product product = productDao.findById(category_products.get(i).getId());
+            book.setProduct(product);
+            list.add(book);
+        }
+        return list;
     }
 
 }

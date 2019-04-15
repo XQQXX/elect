@@ -14,11 +14,11 @@
 				</h3>
 				<ul class="ul_left_list">
                     <c:forEach var="second" items="${first.value}">
-						<!--2级分类开始-->
-						<li>
-							<a href='book_list.jsp'>${second.name}</a>
-						</li>
-						<!--2级分类结束-->
+                    <!--2级分类开始-->
+                    <li>
+                        <a href='list.main?id=${second.id}&name=${first.key}'>${second.name}</a>
+                    </li>
+                    <!--2级分类结束-->
                     </c:forEach>
 				</ul>
 

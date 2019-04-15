@@ -1,6 +1,7 @@
 package com.elect.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Category implements Serializable {
     private int id;
@@ -9,6 +10,16 @@ public class Category implements Serializable {
     private String name;
     private String description;
     private int parent_id;
+
+    private List<Category_product> category_products;
+
+    public List<Category_product> getCategory_products() {
+        return category_products;
+    }
+
+    public void setCategory_products(List<Category_product> category_products) {
+        this.category_products = category_products;
+    }
 
     public Category() {
     }

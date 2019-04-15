@@ -23,7 +23,7 @@
 		<div class='your_position'>
 			您现在的位置:&nbsp;
 			<a href='main.jsp'>当当图书</a> &gt;&gt;
-			<font style='color: #cc3300'><strong>小说</strong> </font>
+			<font style='color: #cc3300'><strong>${name}</strong> </font>
 		</div>
 
 		<div class="book">
@@ -39,25 +39,25 @@
 							<li>
 								<div>
 									<div class=second_fenlei>
-										&middot;全部&nbsp;(${bookList.size()})
+                                        &middot;全部&nbsp;(<c:forEach items="${categories}" var="first"></c:forEach>)
 									</div>
 								</div>
 							</li>
 							<div class="clear"></div>
-							
+
 							<!--2级分类开始-->
-							<c:forEach items="${category}" var="first">
-                            <li>
-								<div>
-									<div class=second_fenlei>
-										&middot;
-									</div>
-									<div class=second_fenlei>
-										<a href="#">${first.key}(${first.value.size()})</a>
-									</div>
-								</div>
-							</li>
-							<div class="clear"></div>
+							<c:forEach items="${categories}" var="first">
+                                     <li>
+                                        <div>
+                                            <div class=second_fenlei>
+                                                &middot;
+                                            </div>
+                                            <div class=second_fenlei>
+                                                <a href="list.main?id=${first.id}&name=${name}">${first.name}(${first.category_products.size()})</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <div class="clear"></div>
                             </c:forEach>
 							<!--2级分类结束-->
 							
@@ -102,7 +102,7 @@
 							</div>
 				
 							<div class='list_r_title_text3b'>
-								第1页/共5页
+                                第${page}页/共${Math.ceil(bookList.size()/5)}页
 							</div>
 							
 							<div class='list_r_title_text3a'>
@@ -121,7 +121,7 @@
 					
 					<!--商品条目开始-->
                     <div class="list_r_line"></div>
-                    <c:forEach items="${bookList}" var="book">
+                    <c:forEach items="${bookCats}" var="book">
 						<div class="clear"></div>
 						<div class="list_r_list">
 							<span class="list_r_list_book"><a name="link_prd_img" href='#'>

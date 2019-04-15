@@ -11,4 +11,6 @@ public interface ProductDao {
      * @throws Exception
      */
     List<Product> findAll() throws Exception;
+
+    Product findById(int id) throws Exception;
 }
