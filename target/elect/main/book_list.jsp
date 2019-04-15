@@ -39,46 +39,26 @@
 							<li>
 								<div>
 									<div class=second_fenlei>
-										&middot;全部&nbsp;(23)
+										&middot;全部&nbsp;(${bookList.size()})
 									</div>
 								</div>
 							</li>
 							<div class="clear"></div>
 							
 							<!--2级分类开始-->
-							<li>
+							<c:forEach items="${category}" var="first">
+                            <li>
 								<div>
 									<div class=second_fenlei>
 										&middot;
 									</div>
 									<div class=second_fenlei>
-										<a href="#">武侠小说&nbsp;(10)</a>
-									</div>
-								</div>
-							</li>
-						    <div class="clear"></div>
-							<li>
-								<div>
-									<div class=second_fenlei>
-										&middot;
-									</div>
-									<div class=second_fenlei3>
-										<a href="#">近现在小说&nbsp;(8)</a>
+										<a href="#">${first.key}(${first.value.size()})</a>
 									</div>
 								</div>
 							</li>
 							<div class="clear"></div>
-							<li>
-								<div>
-									<div class=second_fenlei>
-											&middot;
-									</div>
-									<div class=second_fenlei>
-										<a href="#">四大名著&nbsp;(5)</a>
-									</div>
-								</div>
-							</li>
-							<div class="clear"></div>
+                            </c:forEach>
 							<!--2级分类结束-->
 							
 							<li>

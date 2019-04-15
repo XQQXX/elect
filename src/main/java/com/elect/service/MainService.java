@@ -1,9 +1,11 @@
 package com.elect.service;
 
 import com.elect.entity.Book;
+import com.elect.entity.Category;
 import com.elect.entity.Product;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MainService {
 
@@ -29,9 +31,16 @@ public interface MainService {
     List<Product> newBook() throws Exception;
 
     /**
-     * 图书分类
+     * 图书ALL
      * @return
      * @throws Exception
      */
     List<Book> bookList() throws Exception;
+
+    /**
+     * 图书分类
+     * @return
+     * @throws Exception
+     */
+    Map<String,List<Category>> Category() throws Exception;
 }

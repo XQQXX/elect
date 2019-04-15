@@ -1,6 +1,7 @@
 package com.elect.action.main;
 
 import com.elect.entity.Book;
+import com.elect.entity.Category;
 import com.elect.entity.Product;
 import com.elect.service.MainService;
 import com.elect.service.impl.MainServiceImpl;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/main")
 public class MainServlet extends HttpServlet {
@@ -34,6 +36,9 @@ public class MainServlet extends HttpServlet {
 //            所有图书
             List<Book> bookList=mainService.bookList();
             request.getSession().setAttribute("bookList",bookList);
+//            图书分类
+            Map<String,List<Category>> category=mainService.Category();
+            request.getSession().setAttribute("category",category);
             response.sendRedirect("main/main.jsp");
         } catch (Exception e) {
             e.printStackTrace();

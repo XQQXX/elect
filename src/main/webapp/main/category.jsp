@@ -6,29 +6,22 @@
 		</h2>
 		
 		<!--1级分类开始-->
-			<div class="bg_old" onmouseover="this.className = 'bg_white';"
+		<c:forEach items="${category}" var="first">
+        <div class="bg_old" onmouseover="this.className = 'bg_white';"
 				onmouseout="this.className = 'bg_old';">
 				<h3>
-					[<a href='#'>小说</a>]
+					[<a href='#'>${first.key}</a>]
 				</h3>
 				<ul class="ul_left_list">
-
+                    <c:forEach var="second" items="${first.value}">
 						<!--2级分类开始-->
 						<li>
-							<a href='book_list.jsp'>武侠小说</a>
-						</li>
-						<li>
-							<a href='book_list.jsp'>近现代小说</a>
-						</li>
-						<li>
-							<a href='book_list.jsp'>武侠小说</a>
-						</li>
-						<li>
-							<a href='book_list.jsp'>近现代小说</a>
+							<a href='book_list.jsp'>${second.name}</a>
 						</li>
 						<!--2级分类结束-->
-
+                    </c:forEach>
 				</ul>
+
 				<div class="empty_left">
 				</div>
 			</div>
@@ -36,40 +29,9 @@
 			<div class="more2">
 			</div>
 			<!--1级分类结束-->
-		<!--1级分类开始-->
-			<div class="bg_old" onmouseover="this.className = 'bg_white';"
-				onmouseout="this.className = 'bg_old';">
-				<h3>
-					[<a href='#'>小说</a>]
-				</h3>
-				<ul class="ul_left_list">
+        </c:forEach>
 
-						<!--2级分类开始-->
-						<li>
-							<a href='book_list.jsp'>武侠小说</a>
-						</li>
-						<li>
-							<a href='book_list.jsp'>近现代小说</a>
-						</li>
-						<li>
-							<a href='book_list.jsp'>武侠小说</a>
-						</li>
-						<li>
-							<a href='book_list.jsp'>近现代小说</a>
-						</li>
-						<!--2级分类结束-->
-
-				</ul>
-				<div class="empty_left">
-				</div>
-			</div>
-
-			<div class="more2">
-			</div>
-			<!--1级分类结束-->
-
-
-		<div class="bg_old">
+        <div class="bg_old">
 			<h3>
 				&nbsp;
 			</h3>
