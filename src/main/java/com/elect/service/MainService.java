@@ -51,4 +51,13 @@ public interface MainService {
      * @throws Exception
      */
     List<Book> CateList(int id) throws Exception;
+
+    /**
+     * 分页
+     * @param page
+     * @param bookCats
+     * @return
+     * @throws Exception
+     */
+    List<Book> paging(int page, List<Book> bookCats) throws Exception;
 }

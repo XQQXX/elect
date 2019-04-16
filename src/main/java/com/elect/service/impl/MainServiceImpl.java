@@ -103,14 +103,20 @@ public class MainServiceImpl implements MainService {
     public List<Book> CateList(int id) throws Exception {
         List<Book> list=new ArrayList<Book>();
         List<Category_product> category_products =categoryProductDao.findByCatId(id);
-        System.out.println(category_products);
         for(int i=0;i<category_products.size();i++) {
             Book book = bookDao.findBookById(category_products.get(i).getProduct_id());
-            System.out.println(book);
             Product product = productDao.findById(category_products.get(i).getProduct_id());
-            System.out.println(product);
             book.setProduct(product);
             list.add(book);
+        }
+        return list;
+    }
+
+    @Override
+    public List<Book> paging(int page, List<Book> bookCats) throws Exception {
+        List<Book> list=new ArrayList<>();
+        for(int i=(page-1)*5;i<page*5&&i<bookCats.size();i++) {
+            list.add(bookCats.get(i));
         }
         return list;
     }

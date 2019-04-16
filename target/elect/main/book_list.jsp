@@ -1,4 +1,5 @@
 <%@page contentType="text/html;charset=utf-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -42,7 +43,8 @@
                                         <c:forEach items="${categories}" var="first">
                                             <c:set var="totol" value="${totol+first.category_products.size()}"></c:set>
                                         </c:forEach>
-                                        &middot;全部&nbsp;(${totol})
+
+                                        <a href="list.main?id=${categories.get(0).parent_id}&name=${name}">&middot;全部&nbsp;(${totol})</a>
 									</div>
 								</div>
 							</li>
@@ -93,38 +95,41 @@
 						<div id="divTopPageNavi" class="list_r_title_text3">
 
 							<!--分页导航开始-->
-							
+							<c:if test="${page>1}">
 							<div class='list_r_title_text3a'>
 								<a name=link_page_next
-									href="#">
+									href="paging.main?page=${page-1}">
 								<img src='../images/page_up.gif' /> </a>
 							</div>
-	
+                            </c:if>
+                            <c:if test="${page<=1}">
 							<div class='list_r_title_text3a'>
 								<img src='../images/page_up_gray.gif' />
 							</div>
-				
+                            </c:if>
 							<div class='list_r_title_text3b'>
-                                第${page}页/共${Math.ceil(bookList.size()/5)}页
+                                <fmt:formatNumber var="c" value="${bookCats.size() / 5}" pattern="#"/>
+                                第${page}页/共${c}页
 							</div>
-							
+                            <c:if test="${page<c}">
 							<div class='list_r_title_text3a'>
 								<a name=link_page_next
-									href="#">
+									href="paging.main?page=${page+1}">
 									<img src='../images/page_down.gif' /> </a>
 							</div>
-			
+                            </c:if>
+                            <c:if test="${page>=c}">
 							<div class='list_r_title_text3a'>
 								<img src='../images/page_down_gray.gif' />
 							</div>
-
+                            </c:if>
 							<!--分页导航结束-->
 						</div>
 					</div>
 					
 					<!--商品条目开始-->
                     <div class="list_r_line"></div>
-                    <c:forEach items="${bookCats}" var="book">
+                    <c:forEach items="${bookCat}" var="book">
 						<div class="clear"></div>
 						<div class="list_r_list">
 							<span class="list_r_list_book"><a name="link_prd_img" href='#'>

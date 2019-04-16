@@ -55,11 +55,27 @@ public class MainServlet extends HttpServlet {
 //                显示分类栏
                 Map<String, List<Category>> category= (Map<String, List<Category>>) request.getSession().getAttribute("category");
                 List<Category> categories=category.get(name);
-                request.setAttribute("categories", categories);
-                request.setAttribute("name",name);
+                request.getSession().setAttribute("categories", categories);
+                request.getSession().setAttribute("name",name);
 //                按分类显示图书
+                int page=1;
                 List<Book> bookCats=mainService.CateList(id);
-                request.setAttribute("bookCats",bookCats);
+                request.setAttribute("page",page);
+                request.getSession().setAttribute("bookCats",bookCats);
+                request.getRequestDispatcher("paging.main?page="+page).forward(request,response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+//        分页
+        if(uri.equals("/paging")){
+                int page=Integer.parseInt(request.getParameter("page"));
+                request.setAttribute("page",page);
+                List<Book> bookCats= (List<Book>) request.getSession().getAttribute("bookCats");
+                //分页
+            try {
+                bookCats=mainService.paging(page,bookCats);
+                request.setAttribute("bookCat",bookCats);
                 request.getRequestDispatcher("book_list.jsp").forward(request,response);
             } catch (Exception e) {
                 e.printStackTrace();
