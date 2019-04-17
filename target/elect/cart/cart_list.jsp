@@ -1,4 +1,5 @@
 <%@page contentType="text/html;charset=utf-8" isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -7,6 +8,17 @@
 		<link href="../css/second.css" rel="stylesheet" type="text/css" />
 		<link href="../css/secBook_Show.css" rel="stylesheet" type="text/css" />
 		<link href="../css/shopping_vehicle.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript">
+            function changeNum(id) {
+                var num=$(".del_num"+id).val();
+                $.post("changeNum.cart",{product_id:id,product_num:num},function () {
+                    $("#numberShop"+id).text(num);
+                    $(".del_num"+id).val("");
+                })
+            }
+
+        </script>
 	</head>
 	<body>
 		<br />
@@ -51,6 +63,9 @@
 					</tr>
 					
                       <!-- 购物列表开始 -->
+                    <c:forEach var="product" items="${cart}">
+                        <c:set var="totol" value="${totol+product.dang_price*product.product_num}"></c:set>
+                        <c:set var="save" value="${save+(product.fixed_price-product.dang_price)*product.product_num}"></c:set>
 						<tr class='td_no_bord'>
 							<td style='display: none'>
 								9317290
@@ -59,57 +74,29 @@
 								<span class="objhide"><img /> </span>
 							</td>
 							<td>
-								<a href="#">Java框架大全</a>
+								<a href="#">${product.product_name}</a>
 							</td>
 							<td class="buy_td_5">
-								<span class="c_gray">180</span>
+								<span class="c_gray">￥${product.fixed_price}</span>
 							</td>
 							<td class="buy_td_4">
 								&nbsp;&nbsp;
-								<span>￥35</span>
+								<span>￥${product.dang_price}</span>
 							</td>
 							<td class="buy_td_1">
-								&nbsp;&nbsp;100
+								&nbsp;&nbsp;<span id="numberShop${product.product_id}">${product.product_num}</span>
 							</td>
 
 							<td >
-								<input class="del_num" type="text" size="3" maxlength="4"/>
-								<a href="#">变更</a>
+								<input class="del_num${product.product_id}" type="text" size="3" maxlength="4"/>
+								<a href="javascript:;" onclick="changeNum(${product.product_id})">变更</a>
 							</td>
 							<td>
-								<a href="#">删除</a>
+								&nbsp&nbsp<a href="changeStatus.cart?id=${product.product_id}&status=0" >删除</a>
 							</td>
 						</tr>
-						
-						<tr class='td_no_bord'>
-							<td style='display: none'>
-								9317291
-							</td>
-							<td class="buy_td_6">
-								<span class="objhide"><img /> </span>
-							</td>
-							<td>
-								<a href="#">Struts2详解</a>
-							</td>
-							<td class="buy_td_5">
-								<span class="c_gray">180</span>
-							</td>
-							<td class="buy_td_4">
-								&nbsp;&nbsp;
-								<span>￥35</span>
-							</td>
-							<td class="buy_td_1">
-								&nbsp;&nbsp;100
-							</td>
+                    </c:forEach>
 
-							<td >
-								<input class="del_num" type="text" size="3" maxlength="4"/>
-								<a href="#">变更</a>
-							</td>
-							<td>
-								<a href="#">删除</a>
-							</td>
-						</tr>
 					<!-- 购物列表结束 -->
 				</table>
 				<div id="div_no_choice" class="objhide">
@@ -125,14 +112,14 @@
 					<div class="total_balance">
 						<div class="save_total">
 							您共节省：
-							<span class="c_red"> ￥<span id="total_economy">56</span>
+							<span class="c_red"> ￥<span id="total_economy">${save}</span>
 							</span>
 							<span id='total_vip_economy' class='objhide'> ( 其中享有优惠： <span
-								class="c_red"> ￥<span id='span_vip_economy'>0.00</span> </span>
+								class="c_red"> ￥<span id='span_vip_economy'>${save}</span> </span>
 								) </span>
 							<span style="font-size: 14px">|</span>
 							<span class="t_add">商品金额总计：</span>
-							<span class="c_red_b"> ￥<span id='total_account'>600</span>
+							<span class="c_red_b"> ￥<span id='total_account'>${totol}</span>
 							</span>
 						</div>
 						<div id="balance" class="balance">
@@ -155,28 +142,28 @@
 			<table class=tabl_del id=del_table>
 				<tbody>
 
-
+                    <c:forEach items="${delCart}" var="product">
 					<tr>
 						<td width="58" class=buy_td_6>
 							&nbsp;
 						</td>
 						<td width="365" class=t2>
-							<a href="#">Java基础</a>
+							<a href="#">${product.product_name}</a>
 						</td>
 						<td width="106" class=buy_td_5>
-							￥56
+							￥${product.fixed_price}
 						</td>
 						<td width="134" class=buy_td_4>
-							<span>￥50</span>
+							<span>￥${product.dang_price}</span>
 						</td>
 						<td width="56" class=buy_td_1>
-							<a href="#">恢复</a>
+							<a href="changeStatus.cart?id=${product.product_id}&status=1">恢复</a>
 						</td>
 						<td width="16" class=objhide>
 							&nbsp;
 						</td>
 					</tr>
-
+                    </c:forEach>
 
 
 					<tr class=td_add_bord>

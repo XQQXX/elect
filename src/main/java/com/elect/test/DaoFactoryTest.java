@@ -10,5 +10,6 @@ public class DaoFactoryTest {
     public void test(){
         UserDao userDao= (UserDao) DaoFactory.getDaoImpl("UserDao");
         System.out.println(userDao);
+        System.out.println(Math.round(-1.5));
     }
 }

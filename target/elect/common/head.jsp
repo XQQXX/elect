@@ -10,7 +10,7 @@
 					href="#" name="helpcenter" class="head_black12a" target="_blank">帮助</a>
 					| </span> </span>
 			<div class="cart gray4012">
-				<a href="../cart/cart_list.jsp">购物车</a>
+				<a href="cart.cart">购物车</a>
 			</div>
 		</div>
 		<span class="head_toutext" id="logininfo">

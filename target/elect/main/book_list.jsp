@@ -10,6 +10,22 @@
 		<link href="../css/second.css" rel="stylesheet" type="text/css" />
 		<link href="../css/secBook_Show.css" rel="stylesheet" type="text/css" />
 		<link href="../css/list.css" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+            #shopCart:hover{
+              padding-left: 2px;
+            }
+        </style>
+        <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript">
+            function checkUser(id,user_id){
+                if (${user==null}){
+                    alert("请先登录哦！");
+                    location="../user/login_form.jsp";
+                }else{
+                    $.post("shop.cart",{id:id,userId:user_id});
+                }
+            }
+        </script>
 	</head>
 	<body>
 		&nbsp;
@@ -161,8 +177,8 @@
 								节省：￥${book.product.fixed_price-book.product.dang_price}
 							</h6>
 							<span class="list_r_list_button"> 
-							<a href="#"> 
-							<img src='../images/buttom_goumai.gif' /> </a>
+							<a href="javascript:;" onclick="checkUser(${book.id},${user.id})">
+							<img src='../images/buttom_goumai.gif'  id="shopCart"/> </a>
                                 <span id="cartinfo"></span></span>
 						</div>
 						<div class="clear"></div>
