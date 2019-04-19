@@ -123,7 +123,7 @@
 							</span>
 						</div>
 						<div id="balance" class="balance">
-							<a name='checkout' href='../order/order_info.jsp' > 
+							<a name='checkout' href='../order/order_info.jsp' >
 								<img src="../images/butt_balance.gif" alt="结算" border="0" title="结算" />
 							</a>
 						</div>

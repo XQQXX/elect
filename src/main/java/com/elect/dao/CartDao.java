@@ -40,4 +40,11 @@ public interface CartDao {
      * @param product_num
      */
     void updateNum(int product_id, int product_num) throws Exception;
+
+    /**
+     * 删除用户购物车
+     * @param user_id
+     * @throws Exception
+     */
+    void deleteCart(int user_id,int status) throws Exception;
 }

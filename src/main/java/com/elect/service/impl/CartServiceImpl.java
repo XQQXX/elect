@@ -41,5 +41,10 @@ public class CartServiceImpl implements CartService {
         cartDao.updateNum(product_id,product_num);
     }
 
+    @Override
+    public void delCart(int user_id,int status) throws Exception {
+        cartDao.deleteCart(user_id,status);
+    }
+
 
 }

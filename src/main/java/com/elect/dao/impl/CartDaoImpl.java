@@ -18,6 +18,7 @@ public class CartDaoImpl implements CartDao {
     private static final String FINDBYPRODUCTID_SQL="select * from d_cart where product_id=?";
     private static final String UPDATESTATUS_SQL="update d_cart set product_num=1,status=? where product_id=?";
     private static final String UPDATEPRODUVTNUM_SQL="update d_cart set product_num=? where product_id=?";
+    private static final String DELETECART_SQL="delete from d_cart where user_id=? and status=?";
     @Override
     public void addCart(Product product,int user_id) throws Exception {
         Connection connection= DBUtil.getConnection();
@@ -78,6 +79,16 @@ public class CartDaoImpl implements CartDao {
         ps.setInt(1,product_num);
         ps.setInt(2,product_id);
         ps.executeUpdate();
+        connection.close();
+    }
+
+    @Override
+    public void deleteCart(int user_id,int status) throws Exception {
+        Connection connection= DBUtil.getConnection();
+        PreparedStatement ps=connection.prepareStatement(DELETECART_SQL);
+        ps.setInt(1,user_id);
+        ps.setInt(2,status);
+        ps.execute();
         connection.close();
     }
 }

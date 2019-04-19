@@ -34,4 +34,11 @@ public interface CartService {
      * @throws Exception
      */
     void changeNum(int product_id, int product_num) throws Exception;
+
+    /**
+     * 下单成功删除购物车内容
+     * @param user_id
+     * @throws Exception
+     */
+    void delCart(int user_id,int status) throws Exception;
 }

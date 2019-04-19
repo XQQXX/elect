@@ -39,7 +39,7 @@ public class cartServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-//            购物车添加商品
+//        购物车添加商品
         if (uri.equals("/shop")) {
             int id = Integer.parseInt(request.getParameter("id"));
             int user_id=Integer.parseInt(request.getParameter("userId"));
@@ -49,7 +49,6 @@ public class cartServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
 //        删除恢复购物车
         if(uri.equals("/changeStatus")){
             int id = Integer.parseInt(request.getParameter("id"));
@@ -61,13 +60,13 @@ public class cartServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
 //        改变商品数量
         if(uri.equals("/changeNum")){
             int product_id = Integer.parseInt(request.getParameter("product_id"));
             int product_num=Integer.parseInt(request.getParameter("product_num"));
             try {
                 cartService.changeNum(product_id,product_num);
+                request.getRequestDispatcher("cart.cart").forward(request,response);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html;charset=utf-8" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -34,45 +35,30 @@
 				</tr>
 
 				<!-- 订单开始 -->
+                <c:forEach var="c" items="${cart}" varStatus="status">
+                    <c:set var="totolPrice" value="${totolPrice+c.product_num*c.dang_price}"></c:set>
 					<tr>
 						<td valign="top">
-							1
+							${status.count}
 						</td>
 						<td valign="top">
-							产品1
+							${c.product_name}
 						</td>
 						<td valign="top">
-							100
+							${c.dang_price}
 						</td>
 						<td valign="top">
-							2
+							${c.product_num}
 						</td>
 						<td valign="top">
-							200
+							${c.product_num*c.dang_price}
 						</td>
 					</tr>
-					
-					<tr>
-						<td valign="top">
-							2
-						</td>
-						<td valign="top">
-							产品2
-						</td>
-						<td valign="top">
-							50
-						</td>
-						<td valign="top">
-							2
-						</td>
-						<td valign="top">
-							100
-						</td>
-					</tr>
+                </c:forEach>
 				<!-- 订单结束 -->
 				<tr>
 					<td valign="top" class="w1" style="text-align: left" colspan="5">
-						<b>总价￥300</b>
+						<b>总价￥${totolPrice}</b>
 					</td>
 				</tr>
 			</table>
@@ -80,10 +66,10 @@
 			<br />
 			<br />
 			<div class="login_in">
-				<a href="../cart/cart_list.jsp"><input id="btnClientRegister" class="button_1" name="submit"
+				<a href="../cart/cart_list.jsp"><input id="btnClientRegister1" class="button_1" name="submit"
 					type="submit" value="取消" /></a>
 			
-				<a href="address_form.jsp"><input id="btnClientRegister" class="button_1" name="submit"
+				<a href="../order/address_form.jsp"><input id="btnClientRegister2" class="button_1" name="submit"
 					type="submit" value="下一步" /></a>
 		
 			</div>

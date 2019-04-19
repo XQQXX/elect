@@ -22,7 +22,7 @@
 					</option>
 				</select>
 			</p>
-			<form name="ctl00" method="get" action="order_ok.jsp" id="f">
+			<form name="ctl00" method="post" action="buildOrder.order" id="f">
 				<input type="hidden" name="id" id="addressId" />
 
 				<table class="tab_login">
@@ -100,10 +100,10 @@
 
 				<div class="login_in">
 
-					<a href="order_info.jsp"><input id="btnClientRegister" class="button_1" name="submit"
-					type="submit" value="取消" /></a>
-			
-				<input id="btnClientRegister" class="button_1" name="submit"
+					<a href="../order/order_info.jsp"><input id="btnClientRegister1" class="button_1" name="submit"
+					type="button" value="取消" /></a>
+
+				<input id="btnClientRegister2" class="button_1" name="submit"
 					type="submit" value="下一步" />
 				</div>
 			</form>
