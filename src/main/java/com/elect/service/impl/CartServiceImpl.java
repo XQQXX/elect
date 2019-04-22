@@ -18,7 +18,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void addCartBook(int id,int user_id) throws Exception {
-        Cart cart=cartDao.findByProductId(id);
+        Cart cart=cartDao.findByProductId(id,user_id);
         if(cart==null) {
             Product product = productDao.findById(id);
             cartDao.addCart(product, user_id);

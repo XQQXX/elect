@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html;charset=utf-8" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -5,7 +6,8 @@
 		<title>生成订单 - 当当网</title>
 		<link href="../css/login.css" rel="stylesheet" type="text/css" />
 		<link href="../css/page_bottom.css" rel="stylesheet" type="text/css" />
-
+        <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="../js/address-form.js"></script>
 	</head>
 	<body>
 		<%@include file="../common/head1.jsp"%>
@@ -17,9 +19,14 @@
 			<p>
 				选择地址：
 				<select id="address">
-					<option>
-						填写新地址
+                    <option>
+                        请选择地址
+                    </option>
+                    <c:forEach var="address" items="${Address}">
+					<option value="${address.id}">
+						${address.full_address}
 					</option>
+                    </c:forEach>
 				</select>
 			</p>
 			<form name="ctl00" method="post" action="buildOrder.order" id="f">

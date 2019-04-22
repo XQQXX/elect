@@ -54,7 +54,22 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void addAddress(Receive_address receive_address) throws Exception {
-        addressDao.addAddress(receive_address);
+        List<Receive_address> list=addressDao.findByUserId(receive_address.getUser_id());
+        if(!list.contains(receive_address)) {
+            addressDao.addAddress(receive_address);
+        }
+    }
+
+    @Override
+    public List<Receive_address> findAllAddress(int user_id) throws Exception{
+        List<Receive_address> list=addressDao.findByUserId(user_id);
+        return list;
+    }
+
+    @Override
+    public Receive_address findAddress(int id) throws Exception {
+        Receive_address receive_address=addressDao.findById(id);
+        return receive_address;
     }
 
 

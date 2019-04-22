@@ -37,4 +37,18 @@ public interface OrderService {
      * @throws Exception
      */
     void addAddress(Receive_address receive_address) throws Exception;
+
+    /**
+     * 查询该用户所有地址
+     * @return
+     */
+    List<Receive_address> findAllAddress(int user_id) throws Exception;
+
+    /**
+     * 根据地址id查询地址
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    Receive_address findAddress(int id) throws Exception;
 }

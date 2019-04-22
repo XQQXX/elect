@@ -1,5 +1,6 @@
 package com.elect.action.cart;
 
+import com.alibaba.fastjson.JSONObject;
 import com.elect.entity.Cart;
 import com.elect.entity.Product;
 import com.elect.entity.User;
@@ -65,8 +66,33 @@ public class cartServlet extends HttpServlet {
             int product_id = Integer.parseInt(request.getParameter("product_id"));
             int product_num=Integer.parseInt(request.getParameter("product_num"));
             try {
+                User user= (User) request.getSession().getAttribute("user");
                 cartService.changeNum(product_id,product_num);
-                request.getRequestDispatcher("cart.cart").forward(request,response);
+                List<Cart> cart = cartService.showCart(1, user.getId());
+                int total=0;
+                int save=0;
+                for(Cart c:cart){
+                    total+=c.getDang_price()*c.getProduct_num();
+                    save+=(c.getFixed_price()-c.getDang_price())*c.getProduct_num();
+                }
+                JSONObject jsonObject=new JSONObject();
+                jsonObject.put("total",total);
+                jsonObject.put("save",save);
+                String price=JSONObject.toJSONString(jsonObject);
+                response.getWriter().write(price);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(uri.equals("/account")){
+            try {
+                User user= (User) request.getSession().getAttribute("user");
+                List<Cart> cart = cartService.showCart(1, user.getId());
+                List<Cart> delCart = cartService.showCart(0, user.getId());
+                request.getSession().setAttribute("cart", cart);
+                request.getSession().setAttribute("delCart", delCart);
+                request.getRequestDispatcher("../order/order_info.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
             }

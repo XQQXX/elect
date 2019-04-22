@@ -12,10 +12,12 @@
         <script type="text/javascript">
             function changeNum(id) {
                 var num=$(".del_num"+id).val();
-                $.post("changeNum.cart",{product_id:id,product_num:num},function () {
+                $.post("changeNum.cart",{product_id:id,product_num:num},function (data) {
                     $("#numberShop"+id).text(num);
                     $(".del_num"+id).val("");
-                })
+                    $("#total_economy").html(data.save);
+                    $("#total_account").html(data.total);
+                },'json')
             }
 
         </script>
@@ -123,7 +125,7 @@
 							</span>
 						</div>
 						<div id="balance" class="balance">
-							<a name='checkout' href='../order/order_info.jsp' >
+							<a name='checkout' href='account.cart' >
 								<img src="../images/butt_balance.gif" alt="结算" border="0" title="结算" />
 							</a>
 						</div>

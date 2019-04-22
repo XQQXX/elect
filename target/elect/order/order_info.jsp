@@ -69,7 +69,7 @@
 				<a href="../cart/cart_list.jsp"><input id="btnClientRegister1" class="button_1" name="submit"
 					type="submit" value="取消" /></a>
 			
-				<a href="../order/address_form.jsp"><input id="btnClientRegister2" class="button_1" name="submit"
+				<a href="addressAll.order"><input id="btnClientRegister2" class="button_1" name="submit"
 					type="submit" value="下一步" /></a>
 		
 			</div>

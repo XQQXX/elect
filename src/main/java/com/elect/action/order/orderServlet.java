@@ -1,8 +1,10 @@
 package com.elect.action.order;
 
+import com.alibaba.fastjson.JSONObject;
 import com.elect.entity.Cart;
 import com.elect.entity.Order;
 import com.elect.entity.Receive_address;
+import com.elect.entity.User;
 import com.elect.service.CartService;
 import com.elect.service.OrderService;
 import com.elect.service.impl.CartServiceImpl;
@@ -57,6 +59,28 @@ public class orderServlet extends HttpServlet {
             }
         }
 
+        if(uri.equals("/addressAll")){
+//            查询所有地址
+            User user=(User)request.getSession().getAttribute("user");
+            try {
+                List<Receive_address> addressList = orderService.findAllAddress(user.getId());
+                request.getSession().setAttribute("Address",addressList);
+                request.getRequestDispatcher("../order/address_form.jsp").forward(request,response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(uri.equals("/findAddress")){
+            int id=Integer.parseInt(request.getParameter("id"));
+            try {
+                Receive_address receive_address=orderService.findAddress(id);
+                String address=JSONObject.toJSONString(receive_address);
+                response.getWriter().write(address);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

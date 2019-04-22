@@ -15,7 +15,7 @@ public class CartDaoImpl implements CartDao {
 
     private static final String ADDCART_SQL="insert into d_cart(user_id,product_id,product_name,fixed_price,dang_price) values(?,?,?,?,?)";
     private static final String FINDBYSTATUS_SQL="select * from d_cart where status=? and user_id=?";
-    private static final String FINDBYPRODUCTID_SQL="select * from d_cart where product_id=?";
+    private static final String FINDBYPRODUCTID_SQL="select * from d_cart where product_id=? and user_id=?";
     private static final String UPDATESTATUS_SQL="update d_cart set product_num=1,status=? where product_id=?";
     private static final String UPDATEPRODUVTNUM_SQL="update d_cart set product_num=? where product_id=?";
     private static final String DELETECART_SQL="delete from d_cart where user_id=? and status=?";
@@ -49,14 +49,15 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public Cart findByProductId(int id) throws Exception {
+    public Cart findByProductId(int id,int user_id) throws Exception {
         Cart cart=null;
         Connection connection= DBUtil.getConnection();
         PreparedStatement ps=connection.prepareStatement(FINDBYPRODUCTID_SQL);
         ps.setInt(1,id);
+        ps.setInt(2,user_id);
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
-            cart=new Cart(rs.getInt(1),rs.getInt(2),id,rs.getString(4),rs.getDouble(5),rs.getDouble(6),rs.getInt(7),rs.getInt(8));
+            cart=new Cart(rs.getInt(1),user_id,id,rs.getString(4),rs.getDouble(5),rs.getDouble(6),rs.getInt(7),rs.getInt(8));
         }
         connection.close();
         return cart;

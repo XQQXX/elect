@@ -26,7 +26,7 @@ public interface CartDao {
      * @param id
      * @return
      */
-    Cart findByProductId(int id) throws Exception;
+    Cart findByProductId(int id,int user_id) throws Exception;
 
     /**
      * 改变status
