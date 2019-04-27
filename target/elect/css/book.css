@@ -189,7 +189,7 @@ h2 .more a{color:#666;font-size:12px;font-weight:normal;}
 
 /*ŒÂ–«Õº È*/
 .book_c_border6{width:520px;margin:16px 0px 0px 0px;}
-.book_c_border6 h2{font-size:14px;color:#CC3300;text-align:left;padding-left:28px;border:solid 1px #A9A9A9;background:#e3e3e3 url(../images/bg_dotted.gif) 5px 2px no-repeat;height:24px;line-height:24px;font-weight:bold;}
+.book_c_border6 h2{font-size:14px;color:#CC3300;text-align:left;padding-left:28px;border:solid 1px #A9A9A9;background:#e3e3e3 url(../images/face1.gif) 5px 2px no-repeat;height:24px;line-height:24px;font-weight:bold;}
 .wuxing_img{margin-bottom:10px;width:53px;height:75px;float:left;margin-right:10px;}
 .wuxing_img img{ width:51px;border:1px solid #404040;}
 .book_c_border6 .book_c_list{ float:left; display:inline;width:254px;margin-top:0px;margin-left:0px;}
@@ -199,7 +199,7 @@ h2 .more a{color:#666;font-size:12px;font-weight:normal;}
 .book_c_list h3{background:url(../images/xuxian_x.gif) repeat-x; line-height:30px; color:#1A66B3;margin-right:10px;}
 .book_c_list h3 a{ color:#1A66B3}
 .book_c_border6 .book_c_list.marl_10{margin-left:12px;}
-.book_c_border6 .book_c_list.marl_10 h2{font-size:14px;color:#CC3300;text-align:left;padding-left:24px;border:solid 1px #A9A9A9;background:#e3e3e3 url(../images/bg_dotted2.gif) 5px 2px no-repeat;height:24px;line-height:24px;font-weight:bold;}
+.book_c_border6 .book_c_list.marl_10 h2{font-size:14px;color:#CC3300;text-align:left;padding-left:24px;border:solid 1px #A9A9A9;background:#e3e3e3 url(../images/face2.gif) 5px 2px no-repeat;height:24px;line-height:24px;font-weight:bold;}
 .yixing{color:#4b5f22;padding-left:7px;}
 .book_r_li_xing{margin:0px;padding:0px; line-height:18px; float:left; width:172px;overflow:hidden; height:54px;}
 
@@ -320,7 +320,7 @@ ul.book_r_b5_button li a{color:#4F4F4F;}
 .book_r_border6 h2{font-size:14px; height:26px; line-height:26px; color:#3A5A2C;background:url(../images/more1_top.gif) bottom repeat-x;margin-bottom:8px;padding-left:5px;font-weight:bold;}
 .book_r_b6_side{ background:#f3f4df; border:1px solid #fff; border-bottom:none; padding:7px 5px;}
 .book_r_b6_side p{margin-left:14px;margin-right:5px;}
-.book_r_border6 h3{ color:#6C9100; background:url(../images/book_r_button.gif) no-repeat; height:16px; line-height:16px;padding-top:2px; width:171px;padding-left:15px;margin-bottom:3px;}
+.book_r_border6 h3{ color:#6C9100; background:url(../images/book_r_t6.gif) no-repeat; height:16px; line-height:16px;padding-top:2px; width:171px;padding-left:15px;margin-bottom:3px;}
 .book_r_border6 h3 a{color:#6C9100;}
 .book_r_b6_title2 a,.book_r_b6_title2{color:#666;}
 .book_r_b6_note{color:#878787;}

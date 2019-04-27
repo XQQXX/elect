@@ -80,4 +80,48 @@ public class Category implements Serializable {
     public void setParent_id(int parent_id) {
         this.parent_id = parent_id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        if (id != category.id) return false;
+        if (turn != category.turn) return false;
+        if (parent_id != category.parent_id) return false;
+        if (en_name != null ? !en_name.equals(category.en_name) : category.en_name != null) return false;
+        if (name != null ? !name.equals(category.name) : category.name != null) return false;
+        if (description != null ? !description.equals(category.description) : category.description != null)
+            return false;
+        return category_products != null ? category_products.equals(category.category_products) : category.category_products == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + turn;
+        result = 31 * result + (en_name != null ? en_name.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + parent_id;
+        result = 31 * result + (category_products != null ? category_products.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String
+    toString() {
+        return "Category{" +
+                "id=" + id +
+                ", turn=" + turn +
+                ", en_name='" + en_name + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", parent_id=" + parent_id +
+                ", category_products=" + category_products +
+                '}';
+    }
 }

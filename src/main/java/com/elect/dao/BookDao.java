@@ -20,4 +20,25 @@ public interface BookDao {
      * @throws Exception
      */
     Book findBookById(int id) throws Exception;
+
+    /**
+     * 根据id删除图书
+     * @param id
+     * @throws Exception
+     */
+    void deleteById(int id) throws Exception;
+
+    /**
+     * 更新图书信息
+     * @param product_id
+     * @param author
+     */
+    void update(int product_id, String author) throws Exception;
+
+    /**
+     * 添加图书
+     * @param book
+     * @throws Exception
+     */
+    int add(Book book) throws Exception;
 }

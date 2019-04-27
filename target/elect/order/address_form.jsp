@@ -19,7 +19,7 @@
 			<p>
 				选择地址：
 				<select id="address">
-                    <option>
+                    <option value="0">
                         请选择地址
                     </option>
                     <c:forEach var="address" items="${Address}">

@@ -42,7 +42,7 @@ public interface MainService {
      * @return
      * @throws Exception
      */
-    Map<String,List<Category>> Category() throws Exception;
+    Map<Category,List<Category>> Category() throws Exception;
 
     /**
      * 按图书类别查询
@@ -60,4 +60,12 @@ public interface MainService {
      * @throws Exception
      */
     List<Book> paging(int page, List<Book> bookCats) throws Exception;
+
+    /**
+     * 显示书籍详情
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    Book detailBook(int id) throws Exception;
 }

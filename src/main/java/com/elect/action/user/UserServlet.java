@@ -135,8 +135,8 @@ public class UserServlet extends HttpServlet {
 
 //        用户退出
         if(uri.equals("/logout")){
-            request.getSession().removeAttribute("user");
-            response.sendRedirect("main.jsp");
+            request.getSession().invalidate();
+            response.sendRedirect("../main.main");
         }
 
     }

@@ -1,11 +1,12 @@
 <%@page contentType="text/html;charset=utf-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page import="java.util.Date" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>当当图书 – 全球最大的中文网上书店</title>
 		<script type="text/javascript" src="../js/prototype-1.6.0.3.js">
-		</script>
+    </script>
 		<link href="../css/book.css" rel="stylesheet" type="text/css" />
 		<link href="../css/second.css" rel="stylesheet" type="text/css" />
 		<link href="../css/secBook_Show.css" rel="stylesheet" type="text/css" />
@@ -40,7 +41,7 @@
 		<div class='your_position'>
 			您现在的位置:&nbsp;
 			<a href='main.jsp'>当当图书</a> &gt;&gt;
-			<font style='color: #cc3300'><strong>${name}</strong> </font>
+			<font style='color: #cc3300'><strong>${name.name}</strong> </font>
 		</div>
 
 		<div class="book">
@@ -60,7 +61,7 @@
                                             <c:set var="totol" value="${totol+first.category_products.size()}"></c:set>
                                         </c:forEach>
 
-                                        <a href="list.main?id=${categories.get(0).parent_id}&name=${name}">&middot;全部&nbsp;(${totol})</a>
+                                        <a href="list.main?id=${categories.get(0).parent_id}&parent_id=${name.id}">&middot;全部&nbsp;(${totol})</a>
 									</div>
 								</div>
 							</li>
@@ -74,7 +75,7 @@
                                                 &middot;
                                             </div>
                                             <div class=second_fenlei>
-                                                <a href="list.main?id=${first.id}&name=${name}">${first.name}(${first.category_products.size()})</a>
+                                                <a href="list.main?id=${first.id}&parent_id=${name.id}">${first.name}(${first.category_products.size()})</a>
                                             </div>
                                         </div>
                                     </li>
@@ -124,7 +125,7 @@
 							</div>
                             </c:if>
 							<div class='list_r_title_text3b'>
-                                <fmt:formatNumber var="c" value="${bookCats.size() / 5}" pattern="#"/>
+                                <fmt:formatNumber var="c" value="${(bookCats.size()+2)/5}" pattern="#"/>
                                 第${page}页/共${c}页
 							</div>
                             <c:if test="${page<c}">
@@ -151,21 +152,21 @@
 							<span class="list_r_list_book"><a name="link_prd_img" href='#'>
 								<img src="../productImages/${book.product.product_pic}" /> </a> </span>
 							<h2>
-								<a name="link_prd_name" href='#'>${book.product.product_name}</a>
+								<a name="link_prd_name" href='detail.main?id=${book.id}'>${book.product.product_name}</a>
 							</h2>
 							<h3>
 								顾客评分：${book.total_page}
 							</h3>
 							<h4 class="list_r_list_h4">
 								作 者:
-								<a href='#' name='作者'>${book.author}</a>
+								<a href='detail.main?id=${book.id}' name='作者'>${book.author}</a>
 							</h4>
 							<h4>
 								出版社：
-								<a href='#' name='出版社'>${book.publishing}</a>
+								<a href='detail.main?id=${book.id}' name='出版社'>${book.publishing}</a>
 							</h4>
 							<h4>
-								出版时间：${book.publish_time}
+								出版时间：<fmt:formatDate value="${Date(book.publish_time)}" pattern="yyyy-MM-dd HH:mm:ss"/>
 							</h4>
 							<h5>
                                     ${book.catalogue}

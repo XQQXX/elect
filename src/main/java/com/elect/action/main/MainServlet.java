@@ -3,7 +3,9 @@ package com.elect.action.main;
 import com.elect.entity.Book;
 import com.elect.entity.Category;
 import com.elect.entity.Product;
+import com.elect.service.AdminService;
 import com.elect.service.MainService;
+import com.elect.service.impl.AdminServiceImpl;
 import com.elect.service.impl.MainServiceImpl;
 
 import javax.servlet.ServletException;
@@ -23,6 +25,7 @@ public class MainServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
 //        注入MainService
         MainService mainService=new MainServiceImpl();
+        AdminService adminService=new AdminServiceImpl();
         String uri=request.getRequestURI();
         uri=uri.substring(uri.lastIndexOf("/"),uri.lastIndexOf("."));
         if(uri.equals("/main")) {
@@ -37,7 +40,7 @@ public class MainServlet extends HttpServlet {
                 List<Product> newBook = mainService.newBook();
                 request.getSession().setAttribute("newBook", newBook);
 //                图书分类
-                Map<String, List<Category>> category = mainService.Category();
+                Map<Category, List<Category>> category = mainService.Category();
                 request.getSession().setAttribute("category", category);
 //                显示所有图书
                 List<Book> bookList = mainService.bookList();
@@ -51,12 +54,13 @@ public class MainServlet extends HttpServlet {
         if(uri.equals("/list")){
             try {
                 int id=Integer.parseInt(request.getParameter("id"));
-                String name=request.getParameter("name");
+                int parent_id=Integer.parseInt(request.getParameter("parent_id"));
+                Category category=adminService.preEdit(parent_id);
 //                显示分类栏
-                Map<String, List<Category>> category= (Map<String, List<Category>>) request.getSession().getAttribute("category");
-                List<Category> categories=category.get(name);
+                Map<Category, List<Category>> categoryListMap= (Map<Category, List<Category>>) request.getSession().getAttribute("category");
+                List<Category> categories=categoryListMap.get(category);
                 request.getSession().setAttribute("categories", categories);
-                request.getSession().setAttribute("name",name);
+                request.getSession().setAttribute("name",category);
 //                按分类显示图书
                 int page=1;
                 List<Book> bookCats=mainService.CateList(id);
@@ -77,6 +81,18 @@ public class MainServlet extends HttpServlet {
                 bookCats=mainService.paging(page,bookCats);
                 request.setAttribute("bookCat",bookCats);
                 request.getRequestDispatcher("book_list.jsp").forward(request,response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+//        book详情
+        if(uri.equals("/detail")){
+            int id=Integer.parseInt(request.getParameter("id"));
+            try {
+                Book book = mainService.detailBook(id);
+                request.setAttribute("book",book);
+                request.getRequestDispatcher("show_product.jsp").forward(request,response);
             } catch (Exception e) {
                 e.printStackTrace();
             }

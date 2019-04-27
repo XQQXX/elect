@@ -10,13 +10,13 @@
         <div class="bg_old" onmouseover="this.className = 'bg_white';"
 				onmouseout="this.className = 'bg_old';">
 				<h3>
-					[<a href='list.main?id=${i.count+1}&name=${first.key}'>${first.key}</a>]
+					[<a href='list.main?id=${first.key.id}&parent_id=${first.key.id}'>${first.key.name}</a>]
 				</h3>
 				<ul class="ul_left_list">
                     <c:forEach var="second" items="${first.value}">
                     <!--2级分类开始-->
                     <li>
-                        <a href='list.main?id=${second.id}&name=${first.key}'>${second.name}</a>
+                        <a href='list.main?id=${second.id}&parent_id=${first.key.id}'>${second.name}</a>
                     </li>
                     <!--2级分类结束-->
                     </c:forEach>

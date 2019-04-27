@@ -85,16 +85,16 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public Map<String,List<Category>> Category() throws Exception {
-        Map<String,List<Category>> categoryMap=new LinkedHashMap<>();
+    public Map<Category,List<Category>> Category() throws Exception {
+        Map<Category,List<Category>> categoryMap=new LinkedHashMap<>();
         List<Category> list=categoryDao.findByParentId(1);
         for(int i=0;i<list.size();i++){
-            List<Category> classify=categoryDao.findByParentId(i+2);
+            List<Category> classify=categoryDao.findByParentId(list.get(i).getId());
             for (int j=0;j<classify.size();j++){
                 List<Category_product> category_products=categoryProductDao.findByCatId(classify.get(j).getId());
                 classify.get(j).setCategory_products(category_products);
             }
-            categoryMap.put(list.get(i).getName(),classify);
+            categoryMap.put(list.get(i),classify);
         }
         return categoryMap;
     }
@@ -119,6 +119,14 @@ public class MainServiceImpl implements MainService {
             list.add(bookCats.get(i));
         }
         return list;
+    }
+
+    @Override
+    public Book detailBook(int id) throws Exception {
+        Book book=bookDao.findBookById(id);
+        Product product=productDao.findById(id);
+        book.setProduct(product);
+        return book;
     }
 
 }

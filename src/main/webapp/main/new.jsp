@@ -8,11 +8,11 @@
     <c:forEach var="product" items="${newBook}">
 	<div class="second_d_wai">
 		<div class="img">
-			<a href="#" target='_blank'><img
+			<a href="detail.main?id=${product.id}" ><img
 					src="../productImages/${product.product_pic}" border=0 /> </a>
 		</div>
 		<div class="shuming">
-			<a href="#" target="_blank">${product.product_name}</a><a href="#" target="_blank"></a>
+			<a href="detail.main?id=${product.id}">${product.product_name}</a><a href="#" target="_blank"></a>
 		</div>
 		<div class="price">
 			定价：￥${product.fixed_price}
